@@ -22,7 +22,7 @@ def bytes_to_json_string(data: bytes) -> str:
     # NOTE: we can't just return 'data.decode()', because that won't work
     # if 'data' is not in a given encoding (e.g. utf-8), as is the case
     # when e.g. 'data' is gzip-compressed.
-    return base64.encodebytes(data).decode("ascii")
+    return base64.encodebytes(data).decode("utf-8")
 
 
 def json_string_to_bytes(value: str) -> bytes:
@@ -30,7 +30,7 @@ def json_string_to_bytes(value: str) -> bytes:
     Given a previously-computed JSON-compatible string representation of
     binary data, return the original binary data.
     """
-    return base64.decodebytes(value.encode("ascii"))
+    return base64.decodebytes(value.encode("utf-8"))
 
 
 def has_asgi3_signature(func: typing.Callable) -> bool:

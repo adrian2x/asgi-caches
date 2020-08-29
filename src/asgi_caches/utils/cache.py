@@ -234,7 +234,7 @@ def generate_cache_key(
             ctx.update(value.encode())
 
     absolute_url = str(request.url)
-    url = hashlib.md5(absolute_url.encode("ascii"))
+    url = hashlib.md5(absolute_url.encode("utf-8"))
 
     return cache.make_key(f"cache_page.{method}.{url.hexdigest()}.{ctx.hexdigest()}")
 
@@ -245,7 +245,7 @@ def generate_varying_headers_cache_key(request: Request, cache: Cache) -> str:
     associating varying headers to a requested URL.
     """
     url = request.url.path
-    url_hash = hashlib.md5(url.encode("ascii"))
+    url_hash = hashlib.md5(url.encode("utf-8"))
     return cache.make_key(f"varying_headers.{url_hash.hexdigest()}")
 
 
